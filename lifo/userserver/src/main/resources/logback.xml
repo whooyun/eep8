@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="logfile_name" value="goodCenterServer"></property>
+    <property name="logfile_path" value="/home/data/userserver"></property>
+    <timestamp key="byhour" dataPattern="yyyy-MM-dd"></timestamp>
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+    <!-- output log to console,打印到catalina.out begin -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %d{yyyy-mm-dd HH:MM:ss.SSS} [%thread] %-5level %logger{32} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+    <!-- output log to console,打印到catalina.out end -->
+
+    <!-- output log to file -->
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- logfile's name. use An absolute path or an Relative path -->
+        <File>${logfile_path}/${logfile_name}.log</File>
+        <!--zip log, -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件归档文件名 按天来回滚{yyyy-MM-dd｝，如果需要按小时来回滚，则设置为{yyyy-MM-dd_HH} -->
+            <FileNamePattern>${logfile_path}/${logfile_name}.%d{yyyy-MM-dd}.%i.log
+            </FileNamePattern>
+            <!--日滚，如果超过5天，则会将前面1天的日志文件删除 -->
+            <MaxHistory>7</MaxHistory>
+            <!--按文件大小滚动，日志文件超过设置大小则归档一次-->
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 50MB 就归档-->
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -
+                %msg%n
+            </pattern>
+        </layout>
+        <!--日志文件最大的大小 -->
+
+    </appender>
+
+    <!--其它框架的日志-->
+    <logger name="java.sql.Connection">
+        <level value="DEBUG" />
+    </logger>
+    <logger name="java.sql.Statement">
+        <level value="DEBUG" />
+    </logger>
+    <logger name="com.ibatis">
+        <level value="DEBUG" />
+    </logger>
+    <logger name="org.mybatis.spring.SqlSessionUtils.main">
+        <level value="DEBUG" />
+    </logger>
+
+    <root>
+        <level value="DEBUG" />
+        <!-- output log to console,打印到catalina.out begin -->
+       <!-- <appender-ref ref="STDOUT" />-->
+        <!-- output log to console,打印到catalina.out begin -->
+        <appender-ref ref="FILE" />
+    </root>
+
+    <!--<include file="/tmp/logback-demo.xml"/> -->
+
+</configuration>

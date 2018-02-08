@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byName">
+
+    <!--dubbo服务提供方begin-->
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="goodCenterServer"/>
+
+    <!-- 使用zookeeper注册中心暴露服务地址,112.74.78.191:2181,47.89.49.99:2181 -->
+    <dubbo:registry id="registry" address="zookeeper://192.168.88.12:2181" check="false"/>
+    <!--dubbo监控-->
+    <dubbo:monitor protocol="registry"/>
+    <!-- 用dubbo协议在14881端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="14881"/>
+
+
+    <!--提供服务 接口实现类-->
+   <!-- <bean id="qmtkCategorySearchInterfaceImpl"
+          class="com.fb.gc.good.api.apiImpl.QmtkCategorySearchInterfaceImpl"/>-->
+    <!-- 提供服务 接口-->
+   <!-- <dubbo:service id="qmtkCategorySearchInterface"
+                   interface="com.fb.gc.good.api.QmtkCategorySearchInterface"
+                   ref="qmtkCategorySearchInterfaceImpl" timeout="1200000"/>-->
+
+
+    <!--dubbo服务方end-->
+
+</beans>

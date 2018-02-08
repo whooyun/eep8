@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lifopop.eep8.user.dao.eep8Test">
+    <sql id="table_name">eep8test</sql>
+
+    <resultMap id="eep8test" type="com.lifopop.eep8.user.po.Eep8Test"/>
+    
+    <select id="searchEep8Test">
+    SELECT  * from    <include refid="table_name" />
+</select>
+</mapper>
