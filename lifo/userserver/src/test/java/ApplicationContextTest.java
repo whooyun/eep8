@@ -15,6 +15,8 @@ public class ApplicationContextTest {
 
         ApplicationContext factory = new ClassPathXmlApplicationContext("classpath:application-config/applicationContext.xml");
         Gson gson=new Gson();
+
+        System.out.println("aaaa");
    /*     QmtkGoodsSearchInterface QmtkGoodsSearchInterfaceImpl = (QmtkGoodsSearchInterface) factory.getBean("qmtkGoodsSearchInterfaceImpl");
 //        QmtkCategorySearchInterface QmtkCategorySearchInterfaceImpl = (QmtkCategorySearchInterface) factory.getBean("qmtkCategorySearchInterfaceImpl");
 //        List<QmtkCatagoryDto> list= QmtkCategorySearchInterfaceImpl.getCategoryCount();
